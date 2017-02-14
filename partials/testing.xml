@@ -1,0 +1,10 @@
+<ns1:CalculateExposureRequest>
+    <ns1:AddedAssets>
+        <ns1:salesPackageId>{salesPackageID fetched from GCC}</ns1:salesPackageId>
+        <ns1:PropositionArray>
+            <ns1:Proposition>
+                <ns1:propositionId>{added-propositionId}</ns1:propositionId>
+            </ns1:Proposition>
+        </ns1:PropositionArray>
+    </ns1:AddedAssets>
+</ns1:CalculateExposureRequest>
