@@ -26,5 +26,6 @@ var postSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
 mongoose.model("User", userSchema);
 mongoose.model("Posts", postSchema);

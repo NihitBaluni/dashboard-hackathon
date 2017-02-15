@@ -8,7 +8,6 @@ router.use(function(req, res, next) {
     if (req.method === 'GET') {
         return next();
     }
-    console.log(req.isAuthenticated());
 
     if (!req.isAuthenticated()) {
         res.redirect('/#login');
