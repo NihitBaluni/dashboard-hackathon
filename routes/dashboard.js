@@ -2,16 +2,26 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var bugs = mongoose.model('Bugs');
+var xmlToJs = require('xml2js');
+var fs = require('fs');
 
 router.route('/bugs')
     .get(function(req, res) {
-        console.log('inside dashboard bugs api');
-        bugs.find(function(err, data) {
-           if (err) {
-               res.send(500, {message: 'No entry present within the database'});
-           }
-            res.json(data);
+        var parser = new xmlToJs.Parser();
+        var xml = "/Users/nihitbaluni/Desktop/Code Applications/MEAN-Test/app/views/testing.xml";
+        fs.readFile(xml, function(err, data) {
+            parser.parseString(data, function(err, result) {
+                res.json(result);
+            })
         });
+        // parseXml();
+        // console.log('inside dashboard bugs api');
+        // bugs.find(function(err, data) {
+        //    if (err) {
+        //        res.send(500, {message: 'No entry present within the database'});
+        //    }
+        //     res.json(data);
+        // });
         // dashboard.find(function(err, data) {
         //     if (err) {
         //         res.send(500, {message: 'no entry present within the database'});
@@ -44,5 +54,16 @@ router.route('/bugs')
         });
         // console.log(res);
     });
+
+function parseXml() {
+    var parser = new xmlToJs.Parser();
+    var xml = "/Users/nihitbaluni/Desktop/Code Applications/MEAN-Test/app/views/testing.xml";
+    fs.readFile(xml, function(err, data) {
+        parser.parseString(data, function(err, result) {
+            res.json(result);
+        })
+    });
+
+}
 
 module.exports = router;

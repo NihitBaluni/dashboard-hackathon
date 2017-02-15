@@ -7,9 +7,8 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-require('./models/models.js')
-require('./models/dashboard.js')
-
+require('./models/models.js');
+require('./models/dashboard.js');
 var api = require('./routes/api');
 var authenticate = require('./routes/authenticate')(passport);
 var dashboard = require('./routes/dashboard');
