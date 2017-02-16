@@ -16,7 +16,7 @@ autoIncrement.initialize(mongoose.connection);
 var bugsInstanceSchema = new mongoose.Schema({
     Id:{type:Number,  default: 0, unique:true},
     reportId: String,
-    classId: String,
+    className: String,
     methodName: String,
     sourceLine: {
         start: Number,
@@ -24,8 +24,8 @@ var bugsInstanceSchema = new mongoose.Schema({
     },
     category: String,
     priority: String,
-    SM: String,
-    LM: String
+    ShortMessage: String,
+    LongMessage: String
 });
 bugsInstanceSchema.plugin(autoIncrement.plugin,
     {
