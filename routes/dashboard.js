@@ -21,22 +21,26 @@ router.route('/bugs')
         parseXml(function(result) {
             // console.log(res);
             var bugsInstances = result.BugCollection.BugInstance;
+            var bugInstance = 0;
+            var bugInstance = 0;
             for (var bugInstance in bugsInstances) {
                 var newBugs = new bugs();
                 var classDetails = bugsInstances[bugInstance].Class[0];
                 if (classDetails.$.primary == 'true') {
                     newBugs.className = classDetails.$.classname;
                 } else {
-                    // continue;
+                    continue;
                 }
                 newBugs.sourceLine.start = classDetails.SourceLine[0].$.start;
                 newBugs.sourceLine.end = classDetails.SourceLine[0].$.end;
                 newBugs.reportId = "repo-" + bugsInstances[bugInstance].$.type;
                 newBugs.category = bugsInstances[bugInstance].$.category;
                 newBugs.priority = bugsInstances[bugInstance].$.priority;
-                newBugs.SM = bugsInstances[bugInstance].ShortMessage;
-                newBugs.LM = bugsInstances[bugInstance].LongMessage;
-                // newBugs.methodName = bugsInstances[bugInstance].Method[0].$.name;
+                newBugs.ShortMessage = bugsInstances[bugInstance].ShortMessage;
+                newBugs.LongMessage = bugsInstances[bugInstance].LongMessage;
+                if (bugsInstances[bugInstance].Method) {
+                    newBugs.methodName = bugsInstances[bugInstance].Method[0].$.name;
+                }
                 newBugs.save(function(err, postData) {
                     if (err) {
                         res.send(500, {message: 'unable to insert within the database'});
